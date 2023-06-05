@@ -1,0 +1,5 @@
+{
+    "editor.formatOnSave": true,
+    "C_Cpp.clang_format_style": "file : ./clang_format",
+    "clang-format.executable": "c:\\Program Files\\LLVM\\bin\\clang-format.exe"
+}
