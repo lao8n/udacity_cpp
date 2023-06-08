@@ -1,3 +1,4 @@
+#include <algorithm>  // for sort
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -6,11 +7,12 @@
 using std::cout;
 using std::ifstream;
 using std::istringstream;
+using std::sort;
 using std::string;
 using std::vector;
 using std::abs;
 
-enum class State {kEmpty, kObstacle, kClosed};
+enum class State {kEmpty, kObstacle, kClosed, kPath};
 
 
 vector<State> ParseLine(string line) {
@@ -49,6 +51,13 @@ bool Compare(vector<int> node1, vector<int> node2){
   return f1 > f2;
 }
 
+/**
+ * Sort the two-dimensional vector of ints in descending order.
+ */
+void CellSort(vector<vector<int>> *v) {
+  sort(v->begin(), v->end(), Compare);
+}
+
 // Calculate the manhattan distance
 int Heuristic(int x1, int y1, int x2, int y2) {
   return abs(x2 - x1) + abs(y2 - y1);
@@ -76,6 +85,24 @@ vector<vector<State>> Search(vector<vector<State>> grid, int init[2], int goal[2
     
   // TODO: Use AddToOpen to add the starting node to the open vector.
   AddToOpen(x, y, g, h, open, grid);
+
+  // TODO: while open vector is non empty {
+  while (open.size() > 0) {
+    // TODO: Sort the open list using CellSort, and get the current node.
+	CellSort(&open); // decreasing order
+    
+    // TODO: Get the x and y values from the current node,
+    // and set grid[x][y] to kPath.
+    vector<int> node = open.back();
+    open.pop_back(); // doesn't return removed element
+	x = node[0], y = node[1];
+    grid[x][y] = State::kPath;
+    
+    // TODO: Check if you've reached the goal. If so, return grid.
+    if(x == goal[0] && y == goal[1]){
+    	return grid;
+    }
+  }
     
   cout << "No path found!" << "\n";
   return std::vector<vector<State>>{};
@@ -111,4 +138,5 @@ int main() {
   TestHeuristic();
   TestAddToOpen();
   TestCompare();
+  TestSearch();
 }
