@@ -12,8 +12,11 @@ using std::string;
 using std::vector;
 using std::abs;
 
-enum class State {kEmpty, kObstacle, kClosed, kPath};
+// TODO: Add kStart and kFinish enumerators to the State enum.
+enum class State {kEmpty, kObstacle, kClosed, kPath, kStart, kFinish};
 
+// directional deltas
+const int delta[4][2]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 
 vector<State> ParseLine(string line) {
     istringstream sline(line);
@@ -69,7 +72,7 @@ bool CheckValidCell(int x, int y, vector<vector<State>> &grid){
 	if(x >= 0 && x < grid.size() && y >= 0 && y < grid[0].size() ) {
     	if (grid[x][y] == State::kEmpty) {
         	return true;
-        }
+      }
     }
  	return false;
 }
@@ -82,6 +85,25 @@ void AddToOpen(int x, int y, int g, int h, vector<vector<int>> &open_nodes, vect
 }
 
 /** 
+ * Expand current nodes's neighbors and add them to the open list.
+ */
+// TODO: ExpandNeighbors(arguments) {
+void ExpandNeighbors(vector<int> &current, int goal[2], vector<vector<int>> &open_nodes, vector<vector<State>> &grid){
+  // TODO: Get current node's data.
+	int x = current[0], y = current[1], g = current[2];
+  // TODO: Loop through current node's potential neighbors.
+	for (const auto& d : delta){
+    	int px = x + d[0], py = y + d[1];
+      	// TODO: Check that the potential neighbor's x2 and y2 values are on the grid and not closed.
+      	if(CheckValidCell(px, py, grid)){
+        	// TODO: Increment g value, compute h value, and add neighbor to open list.
+			AddToOpen(px, py, g + 1, Heuristic(px, py, goal[0], goal[1]), open_nodes, grid);
+        }
+    }
+// } TODO: End the function
+}
+
+/** 
  * Implementation of A* search algorithm
  */
 vector<vector<State>> Search(vector<vector<State>> grid, int init[2], int goal[2]) {
@@ -89,30 +111,38 @@ vector<vector<State>> Search(vector<vector<State>> grid, int init[2], int goal[2
   vector<vector<int>> open {};
   
   // TODO: Initialize the starting node. 
-  int x = init[0], y = init[1];
+  int ix = init[0], iy = init[1];
   int gx = goal[0], gy = goal[1];
   int g = 0;
-  int h = Heuristic(x, y, gx, gy);
-    
+  int h = Heuristic(ix, iy, gx, gy);  
+
   // TODO: Use AddToOpen to add the starting node to the open vector.
-  AddToOpen(x, y, g, h, open, grid);
+  AddToOpen(ix, iy, g, h, open, grid);
 
   // TODO: while open vector is non empty {
   while (open.size() > 0) {
     // TODO: Sort the open list using CellSort, and get the current node.
-	CellSort(&open); // decreasing order
+	  CellSort(&open); // decreasing order
     
     // TODO: Get the x and y values from the current node,
     // and set grid[x][y] to kPath.
     vector<int> node = open.back();
     open.pop_back(); // doesn't return removed element
-	x = node[0], y = node[1];
+	  int x = node[0], y = node[1];
     grid[x][y] = State::kPath;
     
     // TODO: Check if you've reached the goal. If so, return grid.
     if(x == goal[0] && y == goal[1]){
+      // TODO: Set the init grid cell to kStart, and 
+      grid[ix][iy] = State::kStart;
+      // set the goal grid cell to kFinish before returning the grid. 
+      grid[gx][gy] = State::kFinish;
+
     	return grid;
     }
+
+    // If we're not done, expand search to current node's neighbors.
+    ExpandNeighbors(node, goal, open, grid);
   }
     
   cout << "No path found!" << "\n";
@@ -123,6 +153,11 @@ vector<vector<State>> Search(vector<vector<State>> grid, int init[2], int goal[2
 string CellString(State cell) {
   switch(cell) {
     case State::kObstacle: return "⛰️   ";
+    case State::kPath: return "🚗   ";
+    // TODO: Add cases to return "🚦   " for kStart
+    case State::kStart: return "🚦 ";
+    // and "🏁   " for kFinish.
+    case State::kFinish: return "🏁 ";
     default: return "0   "; 
   }
 }
@@ -151,4 +186,5 @@ int main() {
   TestCompare();
   TestSearch();
   TestCheckValidCell();
+  TestExpandNeighbors();
 }
