@@ -1,0 +1,20 @@
+[
+{
+  "directory": "C:/Users/lao8n/OneDrive/Documents/udacity_cpp/cpp_foundations/multifile_programs/cmake/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++14 -o CMakeFiles\\example.dir\\src\\main.cpp.obj -c C:\\Users\\lao8n\\OneDrive\\Documents\\udacity_cpp\\cpp_foundations\\multifile_programs\\cmake\\src\\main.cpp",
+  "file": "C:/Users/lao8n/OneDrive/Documents/udacity_cpp/cpp_foundations/multifile_programs/cmake/src/main.cpp",
+  "output": "CMakeFiles/example.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/lao8n/OneDrive/Documents/udacity_cpp/cpp_foundations/multifile_programs/cmake/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++14 -o CMakeFiles\\example.dir\\src\\increment_and_sum.cpp.obj -c C:\\Users\\lao8n\\OneDrive\\Documents\\udacity_cpp\\cpp_foundations\\multifile_programs\\cmake\\src\\increment_and_sum.cpp",
+  "file": "C:/Users/lao8n/OneDrive/Documents/udacity_cpp/cpp_foundations/multifile_programs/cmake/src/increment_and_sum.cpp",
+  "output": "CMakeFiles/example.dir/src/increment_and_sum.cpp.obj"
+},
+{
+  "directory": "C:/Users/lao8n/OneDrive/Documents/udacity_cpp/cpp_foundations/multifile_programs/cmake/build",
+  "command": "C:\\MinGW\\bin\\g++.exe   -g -std=gnu++14 -o CMakeFiles\\example.dir\\src\\vect_add_one.cpp.obj -c C:\\Users\\lao8n\\OneDrive\\Documents\\udacity_cpp\\cpp_foundations\\multifile_programs\\cmake\\src\\vect_add_one.cpp",
+  "file": "C:/Users/lao8n/OneDrive/Documents/udacity_cpp/cpp_foundations/multifile_programs/cmake/src/vect_add_one.cpp",
+  "output": "CMakeFiles/example.dir/src/vect_add_one.cpp.obj"
+}
+]
