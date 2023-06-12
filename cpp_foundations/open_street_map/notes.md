@@ -33,4 +33,27 @@ also added
 	set(CMAKE_CXX_STANDARD_REQUIRED ON)
 	set(CMAKE_CXX_EXTENSIONS OFF)
 
-    C:\Users\lao8n\Documents\P0267_RefImpl\build\P0267_RefImpl\P0267_RefImpl\CMakeFiles\Export\31736c4fd947c5cd63018067dcd32abd
+set CMAKE_PREFIX_PATH=C:\Users\lao8n\Documents\P0267_RefImpl\build\P0267_RefImpl\P0267_RefImpl\CMakeFiles\Export\31736c4fd947c5cd63018067dcd32abd
+
+gives the following error 
+C:\Users\lao8n\OneDrive\Documents\udacity_cpp\cpp_foundations\open_street_map\build>cmake ..                                                                                        
+-- Selecting Windows SDK version 10.0.22000.0 to target Windows 10.0.22621.
+CMake Error at C:/Users/lao8n/Documents/P0267_RefImpl/build/P0267_RefImpl/P0267_RefImpl/CMakeFiles/Export/31736c4fd947c5cd63018067dcd32abd/io2dConfig.cmake:111 (message):
+  The imported target "io2d::io2d_core" references the file
+
+     "C:/Users/lao8n/Documents/P0267_RefImpl/build/P0267_RefImpl/P0267_RefImpl/lib/io2d_core.lib"
+
+  but this file does not exist.  Possible reasons include:
+
+  * The file was deleted, renamed, or moved to another location.
+
+  * An install or uninstall procedure did not complete successfully.
+
+  * The installation package was faulty and contained
+
+     "C:/Users/lao8n/Documents/P0267_RefImpl/build/P0267_RefImpl/P0267_RefImpl/CMakeFiles/Export/31736c4fd947c5cd63018067dcd32abd/io2dConfig.cmake"
+
+  but not all the files it references.
+
+Call Stack (most recent call first):
+  CMakeLists.txt:15 (find_package)
