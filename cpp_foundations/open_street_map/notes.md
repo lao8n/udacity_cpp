@@ -57,3 +57,11 @@ CMake Error at C:/Users/lao8n/Documents/P0267_RefImpl/build/P0267_RefImpl/P0267_
 
 Call Stack (most recent call first):
   CMakeLists.txt:15 (find_package)
+
+To build and run
+mkdir build && cd build
+cmake ..
+make
+
+./OSM_A_star_search
+./test
