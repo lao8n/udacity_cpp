@@ -34,6 +34,8 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
     current_node->FindNeighbors();
+    // could also do for (auto neighbor : current_node->neighbors) { ... }
+    // or could use auto* or auto& to avoid copying
     for (RouteModel::Node * neighbor : current_node->neighbors) {
         neighbor->parent = current_node;
         neighbor->h_value = CalculateHValue(neighbor);
@@ -61,6 +63,8 @@ void CellSort(std::vector<RouteModel::Node*> *open_list) {
 }
 
 RouteModel::Node *RoutePlanner::NextNode() {
+    // could have done this with a lambda
+    // sort(open_list.begin(), open_list.end(), [](RouteModel::Node* x, RouteModel::Node* y) { return x->g_value + x->h_value > y->g_value + y->h_value; }
     CellSort(&this->open_list); // decreasing order
     RouteModel::Node* lowestSumNode = open_list.back();
     open_list.pop_back();
@@ -110,6 +114,7 @@ void RoutePlanner::AStarSearch() {
     this->start_node->visited = true;
     this->open_list.push_back(this->start_node);
     
+    // could have done while(!open_list.empty()) { ... }
     while(this->open_list.size() > 0) {
         current_node = this->NextNode();
         if(current_node->distance(*this->end_node) == 0) {
