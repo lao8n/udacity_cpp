@@ -7,6 +7,7 @@
 #include "process.h"
 #include "processor.h"
 
+// choice between whether system class should store data or just call underlying linux parser.
 class System {
  public:
   Processor& Cpu();                   // TODO: See src/system.cpp
