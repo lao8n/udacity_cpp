@@ -11,13 +11,13 @@ using std::istringstream;
 
 // TODO: Add the ParseLine function here.
 vector<int> ParseLine(string line){
-  	istringstream my_stream(line);
-    int n;
-    char c;
+  istringstream my_stream(line);
+  int n;
+  char c;
  	vector<int> parsed_line;
-    while (my_stream >> n >> c) {
-      	parsed_line.push_back(n);
-    }
+  while (my_stream >> n >> c) {
+      parsed_line.push_back(n);
+  }
   return parsed_line;
 }
 

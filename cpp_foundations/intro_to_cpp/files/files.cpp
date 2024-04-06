@@ -10,13 +10,13 @@ using std::ifstream;
 
 // TODO: Add the ReadBoardFile function here.
 void ReadBoardFile(string filename){
-  	ifstream boardfile (filename);
-  	if (boardfile) {
-      string line;
-      while(getline(boardfile, line)){
-          cout << line << "\n";
-      }
-  	}
+  ifstream boardfile (filename);
+  if (boardfile) {
+    string line;
+    while(getline(boardfile, line)){
+        cout << line << "\n";
+    }
+  }
 }
 // PrintBoard not used in this exercise
 void PrintBoard(const vector<vector<int>> board) {
