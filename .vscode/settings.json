@@ -65,5 +65,6 @@
     "editor.formatOnType": true,
     "[commonlisp]": {
         "editor.wordSeparators": "`|;:'\",()"
-    }
+    },
+    "cmake.sourceDirectory": "C:/Users/lao8n/OneDrive/Documents/udacity_cpp/cpp_foundations/multifile_programs/cmake"
 }
