@@ -16,3 +16,20 @@ R. 24 : Use weak_ptr to break cycles of shared_ptr
 
 R. 30 : Take smart pointers as parameters only to explicitly express lifetime semantics
 
+R. 33: Take a unique_ptr& parameter to express that a function reseats the widget
+
+R. 34: Take a shared_ptr parameter to express that a function is part owner
+
+R. 35: Take a shared_ptr& parameter to express that a function might reseat the shared pointer
+
+```
+// pass pointer or reference if only meant to read (careful with raw pointers - assume that sending code owns)
+// use smart pointers only if meant to update ownership/do something with it
+void f( object* );  // (a) - advantage is can be null whereas reference cannot be
+void f( object& ); // (b) - default
+void f( unique_ptr<object> ); // (c) best for consuming pointer - don't use const
+void f( unique_ptr<object>& ); // (d) if want to modify ptr but not take ownership don't use const
+void f( shared_ptr<object> ); // (e) make a copy so reference counter increments
+void f( shared_ptr<object>& ); // (f) if want to modify and re-use in caller
+```
+a & b are preferred
