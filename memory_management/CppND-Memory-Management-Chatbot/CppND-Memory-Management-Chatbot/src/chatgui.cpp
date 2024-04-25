@@ -121,7 +121,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     _chatLogic = std::make_unique<ChatLogic>(); 
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
-    _chatLogic->SetPanelDialogHandle(this);
+    _chatLogic->SetPanelDialogHandle(this); // copy unique pointer by rule of 5
 
     // load answer graph from file
     _chatLogic->LoadAnswerGraphFromFile(dataPath + "src/answergraph.txt");
@@ -135,7 +135,7 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-    // delete _chatLogic; chat logic is a smart pointer that will be deleted automatically
+    // delete _chatLogic; it is a smart pointer it does not need to be deleted
 
     ////
     //// EOF STUDENT CODE

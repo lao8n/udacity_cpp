@@ -18,7 +18,7 @@ ChatBot::ChatBot()
 }
 
 // constructor WITH memory allocation
-ChatBot::ChatBot(std::string filename) // copy constructor
+ChatBot::ChatBot(std::string filename)
 {
     std::cout << "ChatBot Constructor" << std::endl;
     
@@ -30,7 +30,7 @@ ChatBot::ChatBot(std::string filename) // copy constructor
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
 }
 
-ChatBot::~ChatBot() // destructor
+ChatBot::~ChatBot()
 {
     std::cout << "ChatBot Destructor" << std::endl;
 
@@ -44,20 +44,25 @@ ChatBot::~ChatBot() // destructor
 
 //// STUDENT CODE
 ////
+// by rule of 5 
 ChatBot::ChatBot(const ChatBot &source) // copy constructor
 {
-    _image = new wxBitmap(*source._image);
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+    _image = new wxBitmap(*(source._image));
     _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
 }
 
-ChatBot &ChatBot::operator=(const ChatBot &source) // by rule of 3 also need copy assignment operator
+ChatBot &ChatBot::operator=(const ChatBot &source) // copy assignment operator
 {
+    std::cout << "ChatBot Assignment Operator" << std::endl;
     if (this == &source){
         return *this; // protect against self-assignment
     }
-    delete _image;
-    _image = new wxBitmap(*source._image);
+    if(_image != NULL)
+        delete _image;
+        _image = NULL;
+    _image = new wxBitmap(*(source._image));
     _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
     return *this;
@@ -65,8 +70,10 @@ ChatBot &ChatBot::operator=(const ChatBot &source) // by rule of 3 also need cop
 
 ChatBot::ChatBot(ChatBot &&source) // move constructor
 {
+    std::cout << "ChatBot Move Constructor" << std::endl;
     _image = source._image;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
     source._image = NULL;
     source._chatLogic = nullptr;
@@ -75,20 +82,23 @@ ChatBot::ChatBot(ChatBot &&source) // move constructor
 
 ChatBot &ChatBot::operator=(ChatBot &&source) // move assignment operator
 {
-    if (this == &source){
-        return *this; // protect against self-assignment
+    std::cout << "Chatbot Move Assignment Operator" << std::endl;
+    if (this == &source)
+    {
+        return *this;
     }
-    delete _image;
+    if (_image != NULL)
+        delete _image;
+        _image = NULL;
     _image = source._image;
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
     source._image = NULL;
     source._chatLogic = nullptr;
     source._rootNode = nullptr;
     return *this;
 }
-
-
 ////
 //// EOF STUDENT CODE
 
