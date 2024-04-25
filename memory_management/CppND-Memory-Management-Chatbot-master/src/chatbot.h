@@ -11,7 +11,7 @@ class ChatBot
 {
 private:
     // data handles (owned)
-    wxBitmap *_image; // avatar image
+    wxBitmap *_image; // avatar image - when chat bot moves the heap allocated image moves with it
 
     // data handles (not owned)
     GraphNode *_currentNode;
@@ -29,7 +29,8 @@ public:
 
     //// STUDENT CODE
     ////
-
+    ChatBot(const ChatBot &source);           // copy constructor
+    ChatBot &operator=(const ChatBot &source); // copy assignment operator
     ////
     //// EOF STUDENT CODE
 

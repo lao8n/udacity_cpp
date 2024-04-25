@@ -18,7 +18,7 @@ ChatBot::ChatBot()
 }
 
 // constructor WITH memory allocation
-ChatBot::ChatBot(std::string filename)
+ChatBot::ChatBot(std::string filename) // copy constructor
 {
     std::cout << "ChatBot Constructor" << std::endl;
     
@@ -30,7 +30,7 @@ ChatBot::ChatBot(std::string filename)
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
 }
 
-ChatBot::~ChatBot()
+ChatBot::~ChatBot() // destructor
 {
     std::cout << "ChatBot Destructor" << std::endl;
 
@@ -44,6 +44,24 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(const ChatBot &source) // copy constructor
+{
+    _image = new wxBitmap(*source._image);
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+}
+
+ChatBot &ChatBot::operator=(const ChatBot &source) // by rule of 3 also need copy assignment operator
+{
+    if (this == &source){
+        return *this; // protect against self-assignment
+    }
+    delete _image;
+    _image = new wxBitmap(*source._image);
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    return *this;
+}
 
 ////
 //// EOF STUDENT CODE
