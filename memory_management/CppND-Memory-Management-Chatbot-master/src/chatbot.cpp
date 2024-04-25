@@ -63,6 +63,32 @@ ChatBot &ChatBot::operator=(const ChatBot &source) // by rule of 3 also need cop
     return *this;
 }
 
+ChatBot::ChatBot(ChatBot &&source) // move constructor
+{
+    _image = source._image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    source._image = NULL;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+}
+
+ChatBot &ChatBot::operator=(ChatBot &&source) // move assignment operator
+{
+    if (this == &source){
+        return *this; // protect against self-assignment
+    }
+    delete _image;
+    _image = source._image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    source._image = NULL;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    return *this;
+}
+
+
 ////
 //// EOF STUDENT CODE
 
