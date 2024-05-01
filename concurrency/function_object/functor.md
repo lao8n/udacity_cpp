@@ -1,0 +1,2 @@
+functor = a function object that has a type and can be stored and passed around
+closure = a functor's result object which can be called using the () operator, similar to a class instance if a lambda is a class.
