@@ -1,6 +1,7 @@
 #include <thread>
 #include <vector>
 
+// first num includes main thread, so 5 threads including the 4 additional threads
 int main()
 {
     std::vector<std::thread> threads;
