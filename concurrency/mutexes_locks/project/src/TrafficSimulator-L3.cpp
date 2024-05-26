@@ -132,7 +132,7 @@ int main()
     std::for_each(vehicles.begin(), vehicles.end(), [](std::shared_ptr<Vehicle> &v) {
         v->simulate();
     });
-
+[]()
     /* PART 3 : Launch visualization */
 
     // add all objects into common vector
